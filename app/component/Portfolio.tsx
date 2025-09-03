@@ -12,9 +12,9 @@ import {
   SiNextdotjs,
   SiTailwindcss,
   SiBootstrap,
-  SiFramer,
   SiGithub,
   SiAngular,
+  SiRedux,
 } from "react-icons/si";
 import { MdDesignServices, MdPhoneIphone, MdWidgets } from "react-icons/md";
 import { FaBrain, FaBook, FaGlobe } from "react-icons/fa";
@@ -22,9 +22,244 @@ import { AiOutlineApi } from "react-icons/ai";
 import { RiFolderSharedLine } from "react-icons/ri";
 import { GrOptimize } from "react-icons/gr";
 import Image from "next/image";
+import ProjectModal from "./ProjectModal";
 
 export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openProjectModal = (project: any) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeProjectModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  // Enhanced projects data with more details
+  const projects = [
+    {
+      title: "Johnson Protection Solutions",
+      desc: "Business management platform for warranty cards and franchise operations, allowing the company to manage branches, franchises, products, and services seamlessly.",
+      tags: ["Next.js 15", "Bootstrap", "API Integration", "Swiper"],
+      img: "/projects/johnson.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Warranty card management system",
+        "Franchise and branch administration",
+        "Product and services showcase",
+        "API-driven dynamic content",
+        "Responsive design with Swiper sliders",
+      ],
+      liveDemo: "https://johnsonksa.net",
+    },
+    {
+      title: "Clash Login System",
+      desc: "Custom login portal for a cyber computer dashboard with responsive design and security features.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/admin-login-clash.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Modern responsive login interface",
+        "Form validation and authentication logic",
+        "Bootstrap-based UI design",
+        "Integration with PHP backend",
+        "Optimized for dashboard access",
+      ],
+    },
+    {
+      title: "Clash Dashboard",
+      desc: "Redesigned dashboard for a cyber computer management system, delivering an improved user experience and clean interface.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/dashbord-clash.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Dashboard redesign with clean UI",
+        "Enhanced usability for admins",
+        "Bootstrap-based responsive layout",
+        "Integration with existing Laravel backend",
+        "Custom styling and improvements",
+      ],
+    },
+    {
+      title: "Nerdware Careers Portal",
+      desc: "Corporate website for a tech company showcasing services and featuring a hiring page for job applications.",
+      tags: ["Next.js 15", "Bootstrap", "API Integration"],
+      img: "/projects/nerdware.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Company service showcase",
+        "Dedicated hiring and careers page",
+        "Responsive corporate design",
+        "API-driven job listings",
+        "SEO-friendly structure",
+      ],
+    },
+    {
+      title: "Borshama E-Commerce",
+      desc: "Full-featured e-commerce platform with product catalog, shopping experience, and customer interaction features.",
+      tags: ["Next.js 15", "Bootstrap", "API Integration"],
+      img: "/projects/borshama.png", // placeholder image
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Dynamic product catalog",
+        "User-friendly shopping interface",
+        "Responsive e-commerce design",
+        "API-powered product management",
+        "Scalable structure for large inventory",
+      ],
+    },
+    {
+      title: "Nuba Nile Cruises",
+      desc: "Luxury tourism website for Nile cruise bookings, featuring stunning visuals, 360° views, and a full reservation system.",
+      tags: [
+        "Next.js 15",
+        "Bootstrap",
+        "API Integration",
+        "Photo-Sphere-Viewer",
+      ],
+      img: "/projects/nuba-nile.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Cruise and room booking system",
+        "360° panoramic location views",
+        "Responsive travel design",
+        "API-powered program details",
+        "Multi-language support",
+      ],
+    },
+    {
+      title: "Fadaa Marketing Welcome Page",
+      desc: "Interactive welcome page for Fadaa Marketing with animations and custom UI to redirect users to the correct system pages.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)", "Animations"],
+      img: "/projects/fadaa-welcome-page.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Creative welcome page design",
+        "Custom animations and transitions",
+        "Error redirection handling",
+        "Responsive layout",
+        "Integration with Laravel system",
+      ],
+    },
+    {
+      title: "Dr. Clark Dental Clinic",
+      desc: "Professional website for a dental clinic, handling appointments, bookings, and showcasing services with an elegant design.",
+      tags: ["React.js", "JavaScript", "CSS"],
+      img: "/projects/dr-clark.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Appointment booking system",
+        "Service showcase for dental work",
+        "Responsive medical website design",
+        "Custom design and branding",
+        "User-friendly patient experience",
+      ],
+    },
+    {
+      title: "Clash Landing Page",
+      desc: "Landing page designed to welcome users before accessing the cyber computer system, with company policies and contact forms.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/clash-landing-page.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Responsive landing page design",
+        "Contact form integration",
+        "Company policies presentation",
+        "Bootstrap-based UI",
+        "Integration with Laravel backend",
+      ],
+    },
+    {
+      title: "WhatsJet Support System",
+      desc: "Corporate system dashboard for managing customer support operations, with custom UI design and dashboard improvements.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/whatsjet-landing-page.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Customer support management dashboard",
+        "UI design customization",
+        "Responsive system interface",
+        "Integration with Laravel backend",
+        "Optimized workflow features",
+      ],
+    },
+    {
+      title: "School ERP Dashboard",
+      desc: "Comprehensive school management system dashboard redesigned to fit client requirements and handle educational operations.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/school.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Dashboard redesign for schools",
+        "Student and class management",
+        "Responsive ERP system interface",
+        "Laravel backend integration",
+        "Customization for client needs",
+      ],
+    },
+    {
+      title: "Nomue Platform",
+      desc: "Multi-vendor investment and operations platform with customized dashboard and branding adjustments.",
+      tags: ["HTML", "CSS", "Bootstrap", "PHP (Laravel)"],
+      img: "/projects/nomue.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Dashboard design customization",
+        "Multi-vendor investment platform",
+        "Responsive corporate design",
+        "Integration with Laravel system",
+        "Brand identity alignment",
+      ],
+    },
+    {
+      title: "Fadaa Marketing Corporate Website",
+      desc: "Corporate website for a marketing agency showcasing branding, web development, and media services with modern animations and API-powered content.",
+      tags: [
+        "Next.js 15",
+        "TypeScript",
+        "Tailwind CSS",
+        "API Integration",
+        "Framer Motion",
+      ],
+      img: "/projects/fadaa-marketing.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Corporate service showcase",
+        "Dynamic content via API",
+        "Multi-section modern design",
+        "Smooth animations with Framer Motion",
+        "Responsive layout across devices",
+      ],
+      liveDemo: "https://fadaa-marketing.com",
+    },
+    {
+      title: "Tazza E-Commerce",
+      desc: "Healthy food e-commerce platform developed in two versions (React and Next.js), featuring product showcase, multi-language support, and interactive UI components.",
+      tags: [
+        "React.js",
+        "Next.js",
+        "Bootstrap",
+        "CSS",
+        "API Integration",
+        "Swiper",
+        "next-intl",
+      ],
+      img: "/projects/tazza.png",
+      link: "https://github.com/mohamedZ555",
+      features: [
+        "Developed in React.js and Next.js versions",
+        "Dynamic product catalog",
+        "Responsive e-commerce design",
+        "Swiper-powered product sliders",
+        "Multi-language support with next-intl",
+      ],
+    },
+  ];
+
   return (
     <main className="font-sans text-gray-100 relative">
       {/* Background */}
@@ -171,8 +406,9 @@ export default function HomePage() {
             { icon: <SiNextdotjs size={40} />, name: "Next.js 15" },
             { icon: <SiTailwindcss size={40} />, name: "Tailwind CSS" },
             { icon: <SiBootstrap size={40} />, name: "Bootstrap" },
-            { icon: <SiFramer size={40} />, name: "Framer Motion" },
             { icon: <SiGithub size={40} />, name: "GitHub" },
+            { icon: <SiAngular size={40} />, name: "Angular" },
+            { icon: <SiRedux size={40} />, name: "Redux Toolkit" },
             { icon: <MdDesignServices size={40} />, name: "UI & UX" },
             { icon: <AiOutlineApi size={40} />, name: "API Integration" },
             { icon: <RiFolderSharedLine size={40} />, name: "Context API" },
@@ -185,7 +421,6 @@ export default function HomePage() {
             { icon: <FaBook size={40} />, name: "Self-Learning" },
             { icon: <FaGlobe size={40} />, name: "next-intl" },
             { icon: <MdWidgets size={40} />, name: "shadcn/ui" },
-            { icon: <SiAngular size={40} />, name: "Angular" },
           ].map((skill, index) => (
             <motion.div
               key={index}
@@ -208,50 +443,16 @@ export default function HomePage() {
           My <span className="text-cyan-400">Projects</span>
         </h2>
         <div className="grid md:grid-cols-2 relative gap-10 max-w-6xl mx-auto">
-          {[
-            {
-              title: "E-commerce Platform",
-              desc: "Full e-commerce platform with products listing, filtering, pagination, wishlist, cart, and checkout flow.",
-              tags: ["Next.js 15", "TypeScript", "Tailwind", "REST API"],
-              img: "/projects/ecommerce.png",
-              link: "https://github.com/mohamedZ555",
-            },
-            {
-              title: "Portfolio Website",
-              desc: "Fully responsive personal portfolio showcasing projects, skills, and animations.",
-              tags: ["React", "Framer Motion", "Tailwind"],
-              img: "/projects/portfolio.png",
-              link: "https://github.com/mohamedZ555",
-            },
-            {
-              title: "Custom Sliders & Galleries",
-              desc: "Multiple responsive image sliders (coverflow, autoplay, thumbnail sync) and custom galleries with Lightbox.",
-              tags: ["Next.js", "Swiper.js", "Bootstrap"],
-              img: "/projects/sliders.png",
-              link: "https://github.com/mohamedZ555",
-            },
-            {
-              title: "Multilingual Websites",
-              desc: "Bilingual (Arabic/English) and trilingual (Arabic/French/English) projects using next-intl.",
-              tags: ["Next.js 15", "next-intl", "Tailwind"],
-              img: "/projects/multilingual.png",
-              link: "https://github.com/mohamedZ555",
-            },
-            {
-              title: "Profile Management System",
-              desc: "User profile edit, image upload, forgot password flow, and account deletion.",
-              tags: ["Next.js", "Context API", "REST API"],
-              img: "/projects/profile.png",
-              link: "https://github.com/mohamedZ555",
-            },
-          ].map((project, index) => (
+          {projects.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="group relative bg-gray-800 rounded-xl overflow-hidden shadow-lg"
+              className="group relative bg-gray-800 rounded-xl overflow-hidden shadow-lg cursor-pointer hover:shadow-xl hover:shadow-cyan-500/20 transition-all duration-300"
+              onClick={() => openProjectModal(project)}
+              whileTap={{ scale: 0.98 }}
             >
               <Image
                 src={project.img}
@@ -262,7 +463,11 @@ export default function HomePage() {
               />
               <div className="p-6">
                 <h3 className="text-2xl font-bold">{project.title}</h3>
-                <p className="mt-3 text-gray-400">{project.desc}</p>
+                <p className="mt-3 text-gray-400">
+                  {project.desc.length > 100
+                    ? project.desc.slice(0,100) + "..."
+                    : project.desc}
+                </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.tags.map((tag, i) => (
                     <span
@@ -273,13 +478,11 @@ export default function HomePage() {
                     </span>
                   ))}
                 </div>
+                <div className="mt-4 text-cyan-400 font-medium text-sm flex items-center gap-2">
+                  <span>Click to view details</span>
+                  <span className="text-lg">→</span>
+                </div>
               </div>
-              <a
-                href={project.link}
-                className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center text-cyan-400 font-semibold transition-opacity"
-              >
-                View Project →
-              </a>
             </motion.div>
           ))}
         </div>
@@ -364,6 +567,14 @@ export default function HomePage() {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(6,182,212,0.08),_transparent_70%)]"></div>
       </footer>
+
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={closeProjectModal}
+        />
+      )}
     </main>
   );
 }
