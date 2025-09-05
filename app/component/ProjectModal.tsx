@@ -1,5 +1,5 @@
 "use client";
-import { FiX, FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import Image from "next/image";
 import { useEffect } from "react";
 
@@ -21,22 +21,26 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({
+  project,
+  isOpen,
+  onClose,
+}: ProjectModalProps) {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         onClose();
       }
     };
 
     if (isOpen) {
-      document.addEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'hidden';
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
-      document.body.style.overflow = 'unset';
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "unset";
     };
   }, [isOpen, onClose]);
 
@@ -45,18 +49,18 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   return (
     <>
       {/* Backdrop */}
-      <div 
+      <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 transition-opacity duration-300"
         onClick={onClose}
       />
-      
+
       {/* Modal */}
       <div className="fixed inset-4 z-50 flex items-center justify-center p-4">
-        <div 
+        <div
           className="bg-gray-900 rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-content"
           style={{
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
           }}
         >
           {/* Header */}
@@ -68,7 +72,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             >
               <FiX size={24} className="text-gray-400" />
             </button>
-            <h2 className="text-3xl font-bold text-cyan-400 pr-12">{project.title}</h2>
+            <h2 className="text-3xl font-bold text-cyan-400 pr-12">
+              {project.title}
+            </h2>
           </div>
 
           {/* Content */}
@@ -87,14 +93,18 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
             {/* Description */}
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-gray-200 mb-3">Description</h3>
+              <h3 className="text-xl font-semibold text-gray-200 mb-3">
+                Description
+              </h3>
               <p className="text-gray-300 leading-relaxed">{project.desc}</p>
             </div>
 
             {/* Features */}
             {project.features && (
               <div className="mb-6">
-                <h3 className="text-xl font-semibold text-gray-200 mb-3">Key Features</h3>
+                <h3 className="text-xl font-semibold text-gray-200 mb-3">
+                  Key Features
+                </h3>
                 <ul className="space-y-2">
                   {project.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
@@ -108,7 +118,9 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
             {/* Technologies */}
             <div className="mb-6">
-              <h3 className="text-xl font-semibold text-gray-200 mb-3">Technologies Used</h3>
+              <h3 className="text-xl font-semibold text-gray-200 mb-3">
+                Technologies Used
+              </h3>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag, index) => (
                   <span
@@ -120,6 +132,18 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 ))}
               </div>
             </div>
+            {project.liveDemo && (
+              <div className="mb-6">
+                <a
+                  href={project.liveDemo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-5 py-2 bg-cyan-500 hover:bg-cyan-600 text-white font-medium rounded-lg shadow-md transition-colors"
+                >
+                  Live Demo
+                </a>
+              </div>
+            )}
           </div>
         </div>
       </div>

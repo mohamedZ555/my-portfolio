@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import Image from "next/image";
 import { LuGithub, LuLinkedin, LuMail, LuMapPin } from "react-icons/lu";
 import {
   SiHtml5,
@@ -21,15 +22,30 @@ import { FaBrain, FaBook, FaGlobe } from "react-icons/fa";
 import { AiOutlineApi } from "react-icons/ai";
 import { RiFolderSharedLine } from "react-icons/ri";
 import { GrOptimize } from "react-icons/gr";
-import Image from "next/image";
 import ProjectModal from "./ProjectModal";
 
 export default function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<{
+    title: string;
+    desc: string;
+    tags: string[];
+    img: string;
+    link: string;
+    features: string[];
+    liveDemo?: string;
+  } | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openProjectModal = (project: any) => {
+  const openProjectModal = (project: {
+    title: string;
+    desc: string;
+    tags: string[];
+    img: string;
+    link: string;
+    features: string[];
+    liveDemo?: string;
+  }) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
@@ -40,7 +56,8 @@ export default function HomePage() {
   };
 
   // Enhanced projects data with more details
-  const projects = [    {
+  const projects = [
+    {
     title: "Fadaa Marketing Corporate Website",
     desc: "Corporate website for a marketing agency showcasing branding, web development, and media services with modern animations and API-powered content.",
     tags: [
@@ -403,7 +420,7 @@ export default function HomePage() {
 
           <div className="flex justify-center">
             <a
-              href="/Mohamed-Ashraf-CV.pdf" // place your CV file in public/ folder
+              href="/MohamedAshrafAbdElMoneemCV.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-semibold shadow-lg hover:shadow-cyan-500/50 transition text-white"
