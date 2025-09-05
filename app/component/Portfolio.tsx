@@ -40,7 +40,26 @@ export default function HomePage() {
   };
 
   // Enhanced projects data with more details
-  const projects = [
+  const projects = [    {
+    title: "Fadaa Marketing Corporate Website",
+    desc: "Corporate website for a marketing agency showcasing branding, web development, and media services with modern animations and API-powered content.",
+    tags: [
+      "Next.js 15",
+      "TypeScript",
+      "Tailwind CSS",
+      "API Integration",
+    ],
+    img: "/projects/fadaa-marketing.png",
+    link: "https://github.com/mohamedZ555",
+    features: [
+      "Corporate service showcase",
+      "Dynamic content via API",
+      "Multi-section modern design",
+      "Smooth animations with Framer Motion",
+      "Responsive layout across devices",
+    ],
+    liveDemo: "https://fadaa-marketing.com",
+  },
     {
       title: "Johnson Protection Solutions",
       desc: "Business management platform for warranty cards and franchise operations, allowing the company to manage branches, franchises, products, and services seamlessly.",
@@ -215,37 +234,14 @@ export default function HomePage() {
         "Brand identity alignment",
       ],
     },
-    {
-      title: "Fadaa Marketing Corporate Website",
-      desc: "Corporate website for a marketing agency showcasing branding, web development, and media services with modern animations and API-powered content.",
-      tags: [
-        "Next.js 15",
-        "TypeScript",
-        "Tailwind CSS",
-        "API Integration",
-        "Framer Motion",
-      ],
-      img: "/projects/fadaa-marketing.png",
-      link: "https://github.com/mohamedZ555",
-      features: [
-        "Corporate service showcase",
-        "Dynamic content via API",
-        "Multi-section modern design",
-        "Smooth animations with Framer Motion",
-        "Responsive layout across devices",
-      ],
-      liveDemo: "https://fadaa-marketing.com",
-    },
+
     {
       title: "Tazza E-Commerce",
       desc: "Healthy food e-commerce platform developed in two versions (React and Next.js), featuring product showcase, multi-language support, and interactive UI components.",
       tags: [
-        "React.js",
         "Next.js",
         "Bootstrap",
-        "CSS",
         "API Integration",
-        "Swiper",
         "next-intl",
       ],
       img: "/projects/tazza.png",
@@ -389,6 +385,33 @@ export default function HomePage() {
             />
           </div>
         </motion.div>
+      </section>
+      {/* About Section */}
+      <section id="about" className="pt-20 px-6 relative">
+        <h2 className="text-4xl font-bold relative text-center mb-12">
+          About <span className="text-cyan-400">Me</span>
+        </h2>
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <p className="text-gray-300 text-lg leading-relaxed">
+            I’m <span className="text-cyan-400 font-semibold">Mohamed Ashraf</span>, 
+            a Frontend Developer from Egypt. I specialize in building modern, 
+            responsive, and multilingual web applications using 
+            <span className="font-medium"> React.js, Next.js 15, TypeScript, and Tailwind/Bootstrap</span>.  
+            Passionate about creating smooth user experiences, 
+            I focus on blending performance with design to deliver high-quality products.
+          </p>
+
+          <div className="flex justify-center">
+            <a
+              href="/Mohamed-Ashraf-CV.pdf" // place your CV file in public/ folder
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-semibold shadow-lg hover:shadow-cyan-500/50 transition text-white"
+            >
+              Download CV
+            </a>
+          </div>
+        </div>
       </section>
 
       {/* Skills Section */}
