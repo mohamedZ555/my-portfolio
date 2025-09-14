@@ -261,7 +261,7 @@ export default function HomePage() {
         "API Integration",
         "next-intl",
       ],
-      img: "/projects/tazza.png",
+      img: "/projects/Tazza.png",
       link: "https://github.com/mohamedZ555",
       features: [
         "Developed in React.js and Next.js versions",
